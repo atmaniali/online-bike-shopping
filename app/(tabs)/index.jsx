@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, SafeAreaView } from "react-native";
+import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, SafeAreaView, ImageBackground } from "react-native";
 import { Colors } from "@/constants/Color";
-import { icons } from "@/constants/Icons";
+import { icons, images } from "@/constants/Icons";
 import data  from '@/services/data'
 import BikeList from '@/components/BikeList'
 import ButtonGroup from '@/components/ButtonGroup'
@@ -19,37 +19,39 @@ const index = () => {
     return ( 
     <View style={styles.container}>
         <SafeAreaView style={{flex:1}}>
-        <View style={styles.header}>
-            <Text style={styles.textHeader}>Chose Your Bike</Text>
-            <TouchableOpacity onPress={alertButton}>
-                <Image source={icons.search} style={styles.icon}  />
-            </TouchableOpacity>
-        </View>
-        <View style={styles.cards}>
-            <View style={styles.largeCard}>
-                <Image source={icons.bike} style={styles.imageLargeCard} />
-                <Text style={styles.textLargeCard}>30% Off</Text>
-            </View>
-            {/* Button Group Component */}
-            <ButtonGroup />
+            <ImageBackground source={images.background} >
+                <View style={styles.header}>
+                    <Text style={styles.textHeader}>Chose Your Bike</Text>
+                    <TouchableOpacity onPress={alertButton}>
+                        <Image source={icons.search} style={styles.icon}  />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.cards}>
+                    <View style={styles.largeCard}>
+                        <Image source={icons.bike} style={styles.imageLargeCard} />
+                        <Text style={styles.textLargeCard}>30% Off</Text>
+                    </View>
+                    {/* Button Group Component */}
+                    <ButtonGroup />
 
-            {/* Bike List Items */}
-            <BikeList 
-            data = {data}
-            modalVisible={modalVisible} 
-            setModalVisible = {setModalVisible}
-            like = {like}
-            setLike = {setLike}
-            setModalItem={setModalItem}
-            />
-        </View>
+                    {/* Bike List Items */}
+                    <BikeList 
+                    data = {data}
+                    modalVisible={modalVisible} 
+                    setModalVisible = {setModalVisible}
+                    like = {like}
+                    setLike = {setLike}
+                    setModalItem={setModalItem}
+                    />
+                </View>
 
-        {modalItem ? <ModalBikeDetail 
-        modalVisible={modalVisible} 
-        setModalVisible={setModalVisible}
-        modalItem={modalItem}
-        setModalItem={setModalItem}
-        />: null}
+                {modalItem ? <ModalBikeDetail 
+                modalVisible={modalVisible} 
+                setModalVisible={setModalVisible}
+                modalItem={modalItem}
+                setModalItem={setModalItem}
+                />: null}
+            </ImageBackground>
        </SafeAreaView> 
     </View> );
 }

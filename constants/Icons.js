@@ -14,6 +14,7 @@ import Robert from '@/assets/images/robert.png';
 import WhiteBike from '@/assets/images/whiteBike.png';
 import Mikkel from '@/assets/images/mikkel.png';
 import Shop from '@/assets/icons/shop.png';
+import Background from '@/assets/images/background.png';
 
 
 export const icons = {
@@ -34,5 +35,6 @@ export const images = {
     helmet: Helmet,
     robert: Robert,
     whiteBike: WhiteBike,
-    mikkel: Mikkel
+    mikkel: Mikkel,
+    background: Background,
 }

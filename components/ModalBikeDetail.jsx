@@ -1,4 +1,4 @@
-import { View, Text, Modal, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Modal, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import React from 'react';
 import { images } from '@/constants/Icons';
 import { Colors } from '@/constants/Color';
@@ -19,6 +19,7 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
     onRequestClose={handleCloseModal}
     >
         <View style={styles.modalContainer}>
+            <ImageBackground source={images.background} >
             <View style={styles.modalContent}>
                 <View style={styles.modalHeader}>
                     <TouchableOpacity onPress={handleCloseModal}>
@@ -54,6 +55,7 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
                         </TouchableOpacity>
                     </View>
                 </View>
+            </ImageBackground>
         </View>
     </Modal>
   )
