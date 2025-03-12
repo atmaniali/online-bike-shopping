@@ -1,8 +1,9 @@
-import { View, FlatList, StyleSheet, Text } from 'react-native'
+import { View, FlatList, StyleSheet, Text, Platform } from 'react-native'
 import React from 'react'
 import BikeItem from './BikeItem'
 
 const BikeList = ({modalVisible, setModalVisible, like, setLike, data, setModalItem}) => {
+  const numberColumn = Platform.OS === 'web' ? 4 : 2
 
 
   return (
@@ -11,7 +12,7 @@ const BikeList = ({modalVisible, setModalVisible, like, setLike, data, setModalI
       data={data} 
       renderItem={({item}) => <BikeItem item={item} like={like} setLike={setLike} modalVisible={modalVisible} setModalVisible={setModalVisible} setModalItem={setModalItem} />} 
       keyExtractor={item => item.id.toString()} 
-      numColumns={2} 
+      numColumns={numberColumn} 
       ListFooterComponent={Footer}
       />
     </View>
