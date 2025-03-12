@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
 
 const Footer = () => {
     return (
-        <View>
-            <Text>No more articles at the moment</Text>
+        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+            <Text style={{color:'white'}}>No more articles at the moment</Text>
         </View>
     )
 }

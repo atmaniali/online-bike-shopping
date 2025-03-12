@@ -123,11 +123,12 @@ const styles = StyleSheet.create({
 
 // DONE : add flatList to component and delete scrollView
 // DONE : update like and dislike button in flat list
-// TODO : update view to not make button bar cache some view of flat list
 // DONE : add modal to show details of bike 
+// TODO : update the modal to show details of bike only when clocking in button 
+// TODO : update design to look nice
+// TODO : update view to not make button bar cache some view of flat list
 // TODO : filter data with button groups
 // TODO : activate search button 
-// TODO : update design to look nice
 // TODO : add pagination to flat list
 // TODO : add loading to flat list
 // TODO : add pull to refresh to flat list
