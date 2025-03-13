@@ -5,12 +5,12 @@ import { icons, images } from "@/constants/Icons";
 import data  from '@/services/data'
 import BikeList from '@/components/BikeList'
 import ButtonGroup from '@/components/ButtonGroup'
-import ModalBikeDetail from "../../components/ModalBikeDetail";
+import ModalBikeDetail from "@/components/ModalBikeDetail";
 
 
 const index = () => {
     const [like, setLike] = useState(null);
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(true)
     const [modalItem, setModalItem] = useState(null)
 
     const alertButton = () => {
