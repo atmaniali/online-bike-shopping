@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View, Text, Modal, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import React from 'react';
 import { images } from '@/constants/Icons';
@@ -6,6 +7,8 @@ import { Colors } from '@/constants/Color';
 
 
 const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem}) => {
+    const [showDescription, setShowDescription] = useState(false);
+
     const handleCloseModal = () => {
         setModalVisible(!modalVisible)
         setModalItem(null)
@@ -33,28 +36,43 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
                 </View>
                 
             </View>
+            {showDescription ? (
             <View style={styles.modalInfoCard}>
-                    <View style={styles.ModalButtons}>
-                        <TouchableOpacity style={styles.ModalButton}>
-                            <Text style={styles.ModalButtonText}>Description</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.ModalButton}>
-                            <Text style={styles.ModalButtonText}>Specification</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modalInfoCardDetail}>
-                        <Text style={styles.modalTitle}>{modalItem.name}</Text>
-                        <Text style={styles.description}>
-                        {modalItem.description}
-                        </Text>
-                    </View>
-                    <View style={styles.modalCardFooter}>
-                        <Text style={styles.modalCardFooterPrice}>$ {modalItem.price}</Text>
-                        <TouchableOpacity style={styles.modalCardFooterButton}>
-                            <Text style={styles.modalCardFooterButtonTitle}>Add to Cart</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.modalCardFooter}>
+                <View style={styles.ModalButtons}>
+                    <TouchableOpacity style={styles.ModalButton} onPress={() => setShowDescription(!showDescription)}>
+                        <Text style={styles.ModalButtonText}>Description</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.ModalButton}>
+                        <Text style={styles.ModalButtonText}>Specification</Text>
+                    </TouchableOpacity>
                 </View>
+                </View>
+            </View>
+            ) : (
+                <View style={styles.modalInfoCard}>
+                <View style={styles.ModalButtons}>
+                    <TouchableOpacity style={styles.ModalButton}>
+                        <Text style={styles.ModalButtonText}>Description</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.ModalButton}>
+                        <Text style={styles.ModalButtonText}>Specification</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.modalInfoCardDetail}>
+                    <Text style={styles.modalTitle}>{modalItem.name}</Text>
+                    <Text style={styles.description}>
+                    {modalItem.description}
+                    </Text>
+                </View>
+                <View style={styles.modalCardFooter}>
+                    <Text style={styles.modalCardFooterPrice}>$ {modalItem.price}</Text>
+                    <TouchableOpacity style={styles.modalCardFooterButton}>
+                        <Text style={styles.modalCardFooterButtonTitle}>Add to Cart</Text>
+                    </TouchableOpacity>
+                </View>
+        </View>
+            )}
             </ImageBackground>
         </View>
     </Modal>
