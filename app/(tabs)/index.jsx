@@ -1,5 +1,6 @@
 import { useState} from "react";
 import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, SafeAreaView, ImageBackground } from "react-native";
+import { SearchBar } from '@rneui/themed';
 import { Colors } from "@/constants/Color";
 import { icons, images } from "@/constants/Icons";
 import data  from '@/services/data'
@@ -13,6 +14,11 @@ const index = () => {
     const [modalVisible, setModalVisible] = useState(true)
     const [modalItem, setModalItem] = useState(null)
     const [bikes, setBikes] = useState(data)
+    const [search, setSearch] = useState('');
+
+    const updateSearch = (search) => {
+        setSearch(search);
+      };
 
     const handleBikesFilter = (text) => {
         const filteredBikes = data.filter(bike => bike.category === text)
@@ -31,7 +37,13 @@ const index = () => {
         <SafeAreaView style={{flex:1}}>
             <ImageBackground source={images.background} style={{flex:1, zIndex:1}} >
                 <View style={styles.header}>
-                    <Text style={styles.textHeader}>Chose Your Bike</Text>
+                    {/* <Text style={styles.textHeader}>Chose Your Bike</Text> */}
+                    <SearchBar
+                    value={search}
+                    onChangeText={updateSearch}
+                    // style={{width:'100%'}}
+                    containerStyle={{width:'90%'}}
+                    />
                     <TouchableOpacity onPress={alertButton}>
                         <Image source={icons.search} style={styles.icon}  />
                     </TouchableOpacity>
@@ -135,9 +147,9 @@ const styles = StyleSheet.create({
 // DONE : update like and dislike button in flat list
 // DONE : add modal to show details of bike 
 // DONE : update the modal to show details of bike only when clocking in button 
+// DONE : filter data with button groups
 // TODO : update design to look nice
 // TODO : update view to not make button bar cache some view of flat list
-// DONE : filter data with button groups
 // TODO : activate search button 
 // TODO : add pagination to flat list
 // TODO : add loading to flat list
