@@ -4,7 +4,7 @@
     "slug": "online-bike-shopping",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/online-bike-icon.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-online-bike-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.atmaniali.onlinebikeshopping"
     },
@@ -31,7 +31,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#000000"
         }
       ]
     ],
@@ -41,17 +41,17 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "7ad73c9e-449c-4295-96da-8ef230df7777"
       }
-    },
-    "owner": "atmani-ali",
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/7ad73c9e-449c-4295-96da-8ef230df7777"
+      // "eas": {
+      //   "projectId": "7ad73c9e-449c-4295-96da-8ef230df7777"
+      // }
     }
+    // "owner": "atmani-ali",
+    // "runtimeVersion": {
+    //   "policy": "appVersion"
+    // },
+    // "updates": {
+    //   "url": "https://u.expo.dev/7ad73c9e-449c-4295-96da-8ef230df7777"
+    // }
   }
 }

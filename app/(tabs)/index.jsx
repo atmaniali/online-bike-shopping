@@ -19,7 +19,7 @@ const index = () => {
     return ( 
     <View style={styles.container}>
         <SafeAreaView style={{flex:1}}>
-            <ImageBackground source={images.background} >
+            <ImageBackground source={images.background} style={{flex:1}} >
                 <View style={styles.header}>
                     <Text style={styles.textHeader}>Chose Your Bike</Text>
                     <TouchableOpacity onPress={alertButton}>
@@ -29,7 +29,7 @@ const index = () => {
                 <View style={styles.cards}>
                     <View style={styles.largeCard}>
                         <Image source={icons.bike} style={styles.imageLargeCard} />
-                        <Text style={styles.textLargeCard}>30% Off</Text>
+                        {/* <Text style={styles.textLargeCard}>30% Off</Text> */}
                     </View>
                     {/* Button Group Component */}
                     <ButtonGroup />
