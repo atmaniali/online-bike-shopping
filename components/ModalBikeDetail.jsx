@@ -22,7 +22,7 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
     onRequestClose={handleCloseModal}
     >
         <View style={styles.modalContainer}>
-            <ImageBackground source={images.background} >
+            {/* <ImageBackground source={images.background} > */}
             <View style={styles.modalContent}>
                 <View style={styles.modalHeader}>
                     <TouchableOpacity onPress={handleCloseModal}>
@@ -36,21 +36,7 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
                 </View>
                 
             </View>
-            {showDescription ? (
             <View style={styles.modalInfoCard}>
-                <View style={styles.modalCardFooter}>
-                <View style={styles.ModalButtons}>
-                    <TouchableOpacity style={styles.ModalButton} onPress={() => setShowDescription(!showDescription)}>
-                        <Text style={styles.ModalButtonText}>Description</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.ModalButton}>
-                        <Text style={styles.ModalButtonText}>Specification</Text>
-                    </TouchableOpacity>
-                </View>
-                </View>
-            </View>
-            ) : (
-                <View style={styles.modalInfoCard}>
                 <View style={styles.ModalButtons}>
                     <TouchableOpacity style={styles.ModalButton}>
                         <Text style={styles.ModalButtonText}>Description</Text>
@@ -72,8 +58,7 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
                     </TouchableOpacity>
                 </View>
         </View>
-            )}
-            </ImageBackground>
+            {/* </ImageBackground> */}
         </View>
     </Modal>
   )
@@ -86,7 +71,8 @@ const styles = StyleSheet.create({
         flex:1,
         // justifyContent:'center',
         alignItems:'center',
-        backgroundColor: 'rgba(0,0 , 0, 0.9)',
+        backgroundColor: 'rgba(55, 182, 233, 0.9)',
+        zIndex:2
     },
     modalContent:{
         width: '90%',
@@ -109,7 +95,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height: 200,
         marginVertical: 20,
-        // backgroundColor:'red',
+        // backgroundColor:'white',
         alignItems:'center'
     },
     imageModal:{
@@ -151,7 +137,7 @@ const styles = StyleSheet.create({
     },
     description:{
         marginVertical: 15,
-        color: Colors.gray,
+        color: Colors.black,
         fontSize: 16,
     },
     modalCardFooter:{

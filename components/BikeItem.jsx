@@ -5,7 +5,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome5';
 import { icons } from '@/constants/Icons';
 
 const BikeItem = ({item, like, setLike, modalVisible, setModalVisible, setModalItem}) => {
-    console.log(item.name)
+    // console.log(item.name)
     const handleLike = () => {
         if (like === item.id ) {setLike(null)}
         else{setLike(item.id)}

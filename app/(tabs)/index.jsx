@@ -19,7 +19,7 @@ const index = () => {
     return ( 
     <View style={styles.container}>
         <SafeAreaView style={{flex:1}}>
-            <ImageBackground source={images.background} style={{flex:1}} >
+            <ImageBackground source={images.background} style={{flex:1, zIndex:1}} >
                 <View style={styles.header}>
                     <Text style={styles.textHeader}>Chose Your Bike</Text>
                     <TouchableOpacity onPress={alertButton}>
@@ -45,12 +45,12 @@ const index = () => {
                     />
                 </View>
 
-                {modalItem ? <ModalBikeDetail 
+                {modalItem && <ModalBikeDetail 
                 modalVisible={modalVisible} 
                 setModalVisible={setModalVisible}
                 modalItem={modalItem}
                 setModalItem={setModalItem}
-                />: null}
+                />}
             </ImageBackground>
        </SafeAreaView> 
     </View> );
