@@ -4,14 +4,14 @@ import ButtonItemWithImage from './ButtonItemWithImage';
 import ButtonItemWithText from './ButtonItemWithText';
 import { icons } from "@/constants/Icons";
 
-const ButtonGroup = () => {
+const ButtonGroup = ({handleBikesFilter, handleAllBikes}) => {
     return ( 
     <View style={styles.cardButtons}>
-        <ButtonItemWithText content="All" />
-        <ButtonItemWithImage imgSrc={icons.electric} addStyle={styles.item} />
-        <ButtonItemWithImage imgSrc={icons.road} />
-        <ButtonItemWithImage imgSrc={icons.mountain} />
-        <ButtonItemWithImage imgSrc={icons.accessory} />
+        <ButtonItemWithText content="All" onPress={handleAllBikes}/>
+        <ButtonItemWithImage imgSrc={icons.electric} addStyle={styles.item} onPress={() => handleBikesFilter('electric')} />
+        <ButtonItemWithImage imgSrc={icons.road} addStyle={styles.item} onPress={() => handleBikesFilter('road')} />
+        <ButtonItemWithImage imgSrc={icons.mountain} addStyle={styles.item} onPress={() => handleBikesFilter('mountain')} />
+        <ButtonItemWithImage imgSrc={icons.accessory} addStyle={styles.item} onPress={() => handleBikesFilter('accessory')} />
     </View> 
 );
 }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     item:{
-        width: '70%',
+        width: '50%',
         height: 24
     }
 })

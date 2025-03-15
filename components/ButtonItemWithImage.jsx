@@ -2,9 +2,9 @@ import React from 'react';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { Colors } from "@/constants/Color";
 
-const ButtonItemWithImage = ({imgSrc, addStyle = {}}) => {
+const ButtonItemWithImage = ({imgSrc, onPress, addStyle = {}}) => {
     return ( 
-        <TouchableOpacity style={styles.cardButton} onPress={() => {console.log('test button component')}}>
+        <TouchableOpacity style={styles.cardButton} onPress={onPress}>
             <Image source={imgSrc} style={[styles.icon, addStyle]} />
         </TouchableOpacity>
      );

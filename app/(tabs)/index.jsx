@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import { Text, View, Image, StyleSheet, TouchableOpacity, Alert, SafeAreaView, ImageBackground } from "react-native";
 import { Colors } from "@/constants/Color";
 import { icons, images } from "@/constants/Icons";
@@ -12,6 +12,16 @@ const index = () => {
     const [like, setLike] = useState(null);
     const [modalVisible, setModalVisible] = useState(true)
     const [modalItem, setModalItem] = useState(null)
+    const [bikes, setBikes] = useState(data)
+
+    const handleBikesFilter = (text) => {
+        const filteredBikes = data.filter(bike => bike.category === text)
+        setBikes(filteredBikes)
+    }
+
+    const handleAllBikes = () => {
+        setBikes(data)
+    }
 
     const alertButton = () => {
         Alert.alert("test")
@@ -32,11 +42,11 @@ const index = () => {
                         {/* <Text style={styles.textLargeCard}>30% Off</Text> */}
                     </View>
                     {/* Button Group Component */}
-                    <ButtonGroup />
+                    <ButtonGroup handleBikesFilter={handleBikesFilter} handleAllBikes={handleAllBikes} />
 
                     {/* Bike List Items */}
                     <BikeList 
-                    data = {data}
+                    data = {bikes}
                     modalVisible={modalVisible} 
                     setModalVisible = {setModalVisible}
                     like = {like}
@@ -124,10 +134,10 @@ const styles = StyleSheet.create({
 // DONE : add flatList to component and delete scrollView
 // DONE : update like and dislike button in flat list
 // DONE : add modal to show details of bike 
-// TODO : update the modal to show details of bike only when clocking in button 
+// DONE : update the modal to show details of bike only when clocking in button 
 // TODO : update design to look nice
 // TODO : update view to not make button bar cache some view of flat list
-// TODO : filter data with button groups
+// DONE : filter data with button groups
 // TODO : activate search button 
 // TODO : add pagination to flat list
 // TODO : add loading to flat list
