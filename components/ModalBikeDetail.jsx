@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { View, Text, Modal, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native'
-import React from 'react';
-import { images } from '@/constants/Icons';
 import { Colors } from '@/constants/Color';
+import ModalInfoCardWithDescription from './modal/ModalInfoCardWithDescription';
+import ModalInfoCard from './modal/ModalInfoCard';
 
 
 
@@ -12,6 +12,10 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
     const handleCloseModal = () => {
         setModalVisible(!modalVisible)
         setModalItem(null)
+    }
+
+    const handleShowDescription = () => {
+        setShowDescription(!showDescription)
     }
 
   return (
@@ -68,7 +72,7 @@ export default ModalBikeDetail
 
 const styles = StyleSheet.create({
     modalContainer:{
-        flex:1,
+        flex:2,
         // justifyContent:'center',
         alignItems:'center',
         backgroundColor: 'rgba(55, 182, 233, 0.9)',
