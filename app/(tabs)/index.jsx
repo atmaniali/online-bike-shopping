@@ -1,5 +1,5 @@
 import { useState} from "react";
-import { View, Image, StyleSheet, TouchableOpacity, Alert, SafeAreaView, ImageBackground, Platform, Text } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity, Alert, ScrollView, ImageBackground, Platform, Text } from "react-native";
 import { SearchBar } from '@rneui/themed';
 import { Colors } from "@/constants/Color";
 import { icons, images } from "@/constants/Icons";
@@ -39,7 +39,7 @@ const index = () => {
     }
     return ( 
     <View style={styles.container}>
-        <SafeAreaView style={{flex:1}}>
+        <ScrollView style={{flex:1}}>
             <ImageBackground source={images.background} style={{flex:1}} >
                 {searchVisible ? (
                     <View style={styles.header}>
@@ -88,7 +88,7 @@ const index = () => {
                 setModalItem={setModalItem}
                 />}
             </ImageBackground>
-       </SafeAreaView> 
+       </ScrollView> 
     </View> );
 }
 
