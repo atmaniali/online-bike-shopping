@@ -39,15 +39,15 @@ const index = () => {
     }
     return ( 
     <View style={styles.container}>
-        <ScrollView style={{flex:1}}>
             <ImageBackground source={images.background} style={{flex:1}} >
+        <ScrollView style={{flex:1}}>
                 {searchVisible ? (
                     <View style={styles.header}>
                     <SearchBar
                     value={search}
                     onChangeText={updateSearch}
-                    platform={Platform.OS === 'web' ? 'default' : Platform}
-                    containerStyle={{width:'80%'}}
+                    platform={Platform.OS === 'web' ? 'default' : Platform.OS}
+                    containerStyle={{width:'80%', height: 55}}
                     />
                     <TouchableOpacity onPress={handleSearch}>
                         <Text style={{color: Colors.white}}>Cancel</Text>
@@ -87,8 +87,8 @@ const index = () => {
                 modalItem={modalItem}
                 setModalItem={setModalItem}
                 />}
-            </ImageBackground>
        </ScrollView> 
+            </ImageBackground>
     </View> );
 }
 
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         padding: 10,
-        backgroundColor: Colors.black
+        backgroundColor: Colors.black,
+        height: 60
     },
     textHeader:{
         fontSize: 25,
@@ -162,10 +163,11 @@ const styles = StyleSheet.create({
 // DONE : add modal to show details of bike 
 // DONE : update the modal to show details of bike only when clocking in button 
 // DONE : filter data with button groups
+// DONE : update view to not make button bar cache some view of flat list
 // DONE : activate search button 
 // TODO : update design to look nice
 // TODO : activate filter search. 
-// TODO : update view to not make button bar cache some view of flat list
+
 // TODO : add pagination to flat list
 // TODO : add loading to flat list
 // TODO : add pull to refresh to flat list

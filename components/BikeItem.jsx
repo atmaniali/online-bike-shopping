@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableWithoutFeedback, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import { Colors } from "@/constants/Color";
 import FontAwesome from '@expo/vector-icons/FontAwesome5';
 import { icons } from '@/constants/Icons';
@@ -16,12 +16,11 @@ const BikeItem = ({item, like, setLike, modalVisible, setModalVisible, setModalI
     }
 
   return (
-    <TouchableWithoutFeedback onPress={handleLike} onLongPress={handleModalItem}>
+    <TouchableWithoutFeedback onPress={handleModalItem}>
         <View style={styles.gridItem}>
-            <TouchableOpacity  style={styles.gridItemButton}>
+            {/* <TouchableOpacity  style={styles.gridItemButton}>
                 <FontAwesome name="heart" size={24} color={like === item.id ? 'red' : 'white'}  />
-                {/* <Image source={like ? icons.like : icons.dislike} style={styles.icon} /> */}
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <Image source={item.image} style={styles.gridItemImage} />
             <View style={{alignItems:"flex-start", marginVertical:10, justifyContent:'space-between'}}>
                 <Text style={styles.gridItemPrice}>{item.type}</Text>
