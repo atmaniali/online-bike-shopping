@@ -8,6 +8,7 @@ import Bike from '@/assets/icons/bike.png';
 import Accessory from '@/assets/icons/accessory.png';
 import Like from '@/assets/icons/like.png';
 import Dislike from '@/assets/icons/dislike.png';
+import Profile from '@/assets/icons/profile.png';
 
 import Helmet from '@/assets/images/roodHealmet.png';
 import Robert from '@/assets/images/robert.png';
@@ -28,7 +29,8 @@ export const icons = {
     accessory: Accessory,
     shop: Shop,
     like: Like,
-    dislike: Dislike
+    dislike: Dislike,
+    profile: Profile,
 }
 
 export const images = {
