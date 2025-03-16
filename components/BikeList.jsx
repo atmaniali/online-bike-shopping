@@ -14,6 +14,7 @@ const BikeList = ({modalVisible, setModalVisible, like, setLike, data, setModalI
       keyExtractor={item => item.id.toString()} 
       numColumns={numberColumn} 
       ListFooterComponent={Footer}
+      scrollEnabled={false}
       />
     </View>
   )
