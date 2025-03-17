@@ -1,18 +1,42 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/Color';
 import Header from '@/components/profile/Header';
 import ProfileImage from '@/components/profile/ProfileImage';
 import CustomInput from '@/components/profile/CustomInput';
+import { images } from '@/constants/Icons';
 
 const profile = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  // const [image, setImage] = React.useState(false);
+  const [image, setImage] = React.useState(images.profileImage);
+
+    const pickImage = async () => {
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ['images', 'videos'],
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 1,
+            });
+
+            console.log("result", result.assets[0].uri);
+
+            if (!result.canceled) {
+                setImage(result.assets[0].uri);
+            }
+        } catch (error) {
+            console.error("Error picking image:", error);
+        }
+    };
+
 
 
   return (
     <ScrollView style={styles.container}>
       <Header />
-      <ProfileImage />
+      <ProfileImage image={image} pickImage={pickImage} />
+
       <View style={styles.nameContainer}>
         <Text style={styles.name}>John Doe</Text>
       </View>
@@ -48,7 +72,7 @@ const profile = () => {
         <CustomInput
           label="Password"
           icon="lock"
-          placeholder="Enter your password"
+          placeholder="*******"
           type="password"
         />
       </View>
