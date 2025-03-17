@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { View, Text, Modal, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, Modal, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import { Colors } from '@/constants/Color';
+import { icons } from '@/constants/Icons';
 import ModalInfoCardWithDescription from './modal/ModalInfoCardWithDescription';
 import ModalInfoCard from './modal/ModalInfoCard';
 
@@ -8,6 +9,12 @@ import ModalInfoCard from './modal/ModalInfoCard';
 
 const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem}) => {
     const [showDescription, setShowDescription] = useState(false);
+    const [like, setLike] = useState(false);
+
+    const handleLike = () => {
+        setLike(!like)
+        console.log('click like button', like)
+    }
 
     const handleCloseModal = () => {
         setModalVisible(!modalVisible)
@@ -36,6 +43,9 @@ const ModalBikeDetail = ({modalVisible, setModalVisible, modalItem, setModalItem
                 </View>
                 
                 <View style={styles.imageModalContainer}>
+                    <TouchableOpacity style={styles.likeButton} onPress={handleLike}>
+                    <Image source={icons.like} style={styles.likeIcon} />
+                    </TouchableOpacity>
                     <Image source={modalItem.image} style={styles.imageModal} />
                 </View>
                 
@@ -150,5 +160,16 @@ const styles = StyleSheet.create({
     modalCardFooterButtonTitle:{
         color:Colors.white,
         fontSize:16
+    },
+    likeIcon:{
+        width: 28,
+        height: 24,
+        tintColor: Colors.white
+    },
+    likeButton:{
+        position: 'absolute',
+        top: 20,
+        right: 10,
+        marginBottom:10
     }
 })
