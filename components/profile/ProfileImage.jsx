@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from '@/constants/Color';
 
-const ProfileImage = ({image, pickImage}) => {
+const ProfileImage = memo(({image, pickImage}) => {
+  console.log("ProfileImage rendered"); // For demonstration
   return (
     <View style={styles.profileImageContainer}>
         <Image 
@@ -15,9 +16,13 @@ const ProfileImage = ({image, pickImage}) => {
         </TouchableOpacity>
     </View>
   )
-}
+}, (prevProps, nextProps) => {
+    // Custom comparison function
+    return prevProps.image === nextProps.image;
+    // We don't compare pickImage because it's a stable function from useCallback
+});
 
-export default ProfileImage
+export default ProfileImage;
 
 const styles = StyleSheet.create({
     profileImageContainer: {

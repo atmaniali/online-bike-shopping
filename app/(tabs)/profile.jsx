@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/Color';
@@ -7,30 +7,41 @@ import ProfileImage from '@/components/profile/ProfileImage';
 import CustomInput from '@/components/profile/CustomInput';
 import { images } from '@/constants/Icons';
 
-const profile = () => {
-  // const [image, setImage] = React.useState(false);
-  const [image, setImage] = React.useState(images.profileImage);
+const Profile = () => {
+  const [image, setImage] = useState(images.profileImage);
+  const [formData, setFormData] = useState({
+    email: '',
+    phone: '',
+    website: '',
+    password: ''
+  });
 
-    const pickImage = async () => {
-        try {
-            const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ['images', 'videos'],
-                allowsEditing: true,
-                aspect: [4, 3],
-                quality: 1,
-            });
+  const pickImage = useCallback(async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images', 'videos'],
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
 
-            console.log("result", result.assets[0].uri);
+      console.log("result", result.assets[0].uri);
 
-            if (!result.canceled) {
-                setImage(result.assets[0].uri);
-            }
-        } catch (error) {
-            console.error("Error picking image:", error);
-        }
-    };
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      setImage(images.profileImage);
+      console.error("Error picking image:", error);
+    }
+  }, []);
 
-
+  const handleInputChange = useCallback((field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -47,6 +58,8 @@ const profile = () => {
           icon="mail"
           placeholder="Enter your email"
           keyboardType="email-address"
+          value={formData.email}
+          onChangeText={(value) => handleInputChange('email', value)}
         />
       </View>
 
@@ -56,6 +69,8 @@ const profile = () => {
           icon="phone"
           placeholder="Enter your phone number"
           keyboardType="phone-pad"
+          value={formData.phone}
+          onChangeText={(value) => handleInputChange('phone', value)}
         />
       </View>
 
@@ -65,6 +80,8 @@ const profile = () => {
           icon="layout"
           placeholder="Enter your website"
           keyboardType="url"
+          value={formData.website}
+          onChangeText={(value) => handleInputChange('website', value)}
         />
       </View>
 
@@ -72,8 +89,10 @@ const profile = () => {
         <CustomInput
           label="Password"
           icon="lock"
-          placeholder="*******"
+          placeholder="Enter your password"
           type="password"
+          value={formData.password}
+          onChangeText={(value) => handleInputChange('password', value)}
         />
       </View>
 
@@ -81,7 +100,7 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile;
 
 const styles = StyleSheet.create({
     container: {
@@ -89,7 +108,6 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.blackGray,
         padding: 4
     },
-    
     nameContainer: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -102,13 +120,10 @@ const styles = StyleSheet.create({
       color: Colors.white
     },
     inputFieldContainer: {
-      // backgroundColor: 'red',
       flex:1,
       padding: 10,
-      
     },
-    
-})
+});
 
 // 1 Component Organization
 // Consider breaking down this large component into smaller reusable components:
