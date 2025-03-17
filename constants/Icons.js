@@ -16,6 +16,7 @@ import WhiteBike from '@/assets/images/whiteBike.png';
 import Mikkel from '@/assets/images/mikkel.png';
 import Shop from '@/assets/icons/shop.png';
 import Background from '@/assets/images/background.png';
+import ProfileImage from '@/assets/images/dp.png';
 
 
 export const icons = {
@@ -39,4 +40,5 @@ export const images = {
     whiteBike: WhiteBike,
     mikkel: Mikkel,
     background: Background,
+    profileImage: ProfileImage,
 }
