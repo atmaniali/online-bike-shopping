@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native'
-import React from 'react'
-import Feather from "react-native-vector-icons/Feather";
-import { Colors } from '@/constants/Color'
-import Header from '@/components/profile/Header'
-import { images } from '@/constants/Icons'
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Colors } from '@/constants/Color';
+import Header from '@/components/profile/Header';
+import ProfileImage from '@/components/profile/ProfileImage';
+import CustomInput from '@/components/profile/CustomInput';
 
 const profile = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -12,55 +12,45 @@ const profile = () => {
   return (
     <ScrollView style={styles.container}>
       <Header />
-      <View style={styles.profileImageContainer}>
-        <Image source={images.profileImage} style={styles.profileImage}/>
-        <TouchableOpacity style={styles.editButton}>
-            <Feather name="edit-3" size={24} color={Colors.white} />
-        </TouchableOpacity>
-      </View>
+      <ProfileImage />
       <View style={styles.nameContainer}>
         <Text style={styles.name}>John Doe</Text>
       </View>
 
       <View style={styles.inputFieldContainer}>
-        <View style={styles.inputFieldContent}>
-          <Text style={styles.inputFieldText}>Your Email</Text>
-          <View style={styles.inputFieldDataContainer}>
-            <Feather name="mail" size={24} color={Colors.white} />
-            <TextInput style={styles.inputFieldData} placeholder="Enter your email" keyboardType='email-address' />
-          </View>
-        </View>
+        <CustomInput
+          label="Your Email"
+          icon="mail"
+          placeholder="Enter your email"
+          keyboardType="email-address"
+        />
       </View>
 
       <View style={styles.inputFieldContainer}>
-        <View style={styles.inputFieldContent}>
-          <Text style={styles.inputFieldText}>Phone Number</Text>
-          <View style={styles.inputFieldDataContainer}>
-            <Feather name="phone" size={24} color={Colors.white} />
-            <TextInput style={styles.inputFieldData} placeholder="Enter your email" keyboardType='phone-pad' />
-          </View>
-        </View>
+        <CustomInput
+          label="Phone Number"
+          icon="phone"
+          placeholder="Enter your phone number"
+          keyboardType="phone-pad"
+        />
       </View>
 
       <View style={styles.inputFieldContainer}>
-        <View style={styles.inputFieldContent}>
-          <Text style={styles.inputFieldText}>Web Site</Text>
-          <View style={styles.inputFieldDataContainer}>
-            <Feather name="layout" size={24} color={Colors.white} />
-            <TextInput style={styles.inputFieldData} placeholder="Enter your email" keyboardType='url' />
-          </View>
-        </View>
+        <CustomInput
+          label="Web Site"
+          icon="layout"
+          placeholder="Enter your website"
+          keyboardType="url"
+        />
       </View>
 
       <View style={styles.inputFieldContainer}>
-        <View style={styles.inputFieldContent}>
-          <Text style={styles.inputFieldText}>Password</Text>
-          <View style={styles.inputFieldDataContainer}>
-            <Feather name="lock" size={24} color={Colors.white} />
-            <TextInput style={styles.inputFieldData} placeholder="Enter your email" secureTextEntry={showPassword} />
-            <Feather name={showPassword ? "eye" : "eye-off"} size={24} color={Colors.white} onPress={() => setShowPassword(!showPassword)} />
-          </View>
-        </View>
+        <CustomInput
+          label="Password"
+          icon="lock"
+          placeholder="Enter your password"
+          type="password"
+        />
       </View>
 
     </ScrollView>
@@ -75,28 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.blackGray,
         padding: 4
     },
-    profileImageContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 10,
-        marginTop:20,
-    },
-    profileImage: {
-        width: 200,
-        height: 200,
-        borderRadius: 50
-    },
-    editButton:{
-      height: 40,
-      width: 40,
-      borderRadius: 20,
-      backgroundColor: Colors.blueLight,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft:90,
-      marginTop:-27,
-      backgroundColor:"orange",
-    },
+    
     nameContainer: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -112,31 +81,73 @@ const styles = StyleSheet.create({
       // backgroundColor: 'red',
       flex:1,
       padding: 10,
-      marginVertical:10,
-    },
-    inputFieldContent: {
       
     },
-    inputFieldText: {
-      fontSize: 16,
-      color: Colors.white,
-      fontWeight: 'bold',
-      marginBottom: 10,
-    },
-    inputFieldDataContainer:{
-      flex:1,
-      flexDirection:'row',
-      alignItems: 'center',
-      borderColor: Colors.white,
-      borderWidth: 1,
-      borderRadius: 10,
-      padding: 10
-    },
-    inputFieldData: {
-      flex:1,
-      color: Colors.white,
-      fontSize: 16,
-      fontWeight: 'bold',
-      padding: 10,
-    }
+    
 })
+
+// 1 Component Organization
+// Consider breaking down this large component into smaller reusable components:
+// - ProfileImage component for the image and edit button
+// - CustomInput component for the repeated input field pattern
+// This would improve maintainability and reusability
+
+// 2 Form State Management
+// Consider using a form management library like Formik or React Hook Form
+// Current implementation lacks form validation and proper state management
+// Also consider adding a submit handler for the form
+
+// 3 Performance Optimization
+// Use React.memo() for child components to prevent unnecessary re-renders
+// Consider using useCallback for event handlers
+
+// 4 Input Field PlaceHolders
+// The placeholder text is incorrect for most fields (all say "Enter your email")
+// Should be specific to each field:
+// - "Enter your phone number"
+// - "Enter your website"
+// - "Enter your password"
+
+// 5 Accessibility
+// Add accessibility labels and hints
+// Example:
+// <TextInput 
+//   accessibilityLabel="Email input field"
+//   accessibilityHint="Enter your email address here"
+// />
+
+// 6 style Improvements
+// Remove commented out code (// backgroundColor: 'red')
+// Consider using StyleSheet.hairlineWidth for border width
+// Use constants for common values (padding, margin, fontSize)
+// Consider using a theme provider for consistent styling
+
+// 7 Error Handling
+// Add error states for input fields
+// Add visual feedback for validation errors
+// Consider adding a loading state for form submission
+
+// 8 Security
+// Add proper input sanitization
+// Consider adding rate limiting for edit attempts
+// Add proper validation for email and phone formats
+
+// 9 User Experience
+// Add keyboard handling (dismissKeyboard on scroll)
+// Add proper keyboard avoiding view
+// Consider adding loading states for image upload
+
+// 10 Type Safety
+// Consider adding TypeScript or PropTypes
+// Add proper interface definitions for the component props and state
+
+// 11 Constants
+// Move hardcoded values to constants
+// Create a separate config file for form field configurations
+
+// Testing
+// Add unit tests for form validation
+// Add snapshot tests for the UI
+// Add integration tests for form submission
+
+// prompte to add "Review optimized code"   "help with implementation"  "Focus on specific aspect ".
