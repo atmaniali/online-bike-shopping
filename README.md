@@ -49,6 +49,10 @@ To learn more about developing your project with Expo, look at the following res
 - Octicons
 - FontAwesome
 
+# Drizzle
+
+[Drizzle](https://orm.drizzle.team/docs/get-started/expo-new) is a database-first schema generator for TypeScript and SQL.
+
 ## Join the community
 
 Join our community of developers creating universal apps.

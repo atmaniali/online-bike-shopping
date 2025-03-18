@@ -44,14 +44,4 @@ app-example
 .esa.*
 
 # Drizzle
-.drizzle
-.drizzle/
-.drizzle/*
-.drizzle/**
-.drizzle/**/*
-.drizzle/**/**
-.drizzle/**/**/*
-.drizzle/**/**/**
-.drizzle/**/**/**/*
-
-
+drizzle/
