@@ -19,7 +19,7 @@ const CustomInput = memo(({
         <View style={styles.inputFieldContent}>
             <Text style={styles.inputFieldText}>{label}</Text>
             <View style={styles.inputFieldDataContainer}>
-                <Feather name={icon} size={24} color={Colors.white} />
+                <Feather name={icon} size={24} color={Colors.white} style={styles.icon} />
                 <TextInput 
                     style={styles.inputFieldData} 
                     placeholder={placeholder}
@@ -35,6 +35,7 @@ const CustomInput = memo(({
                         size={24} 
                         color={Colors.white} 
                         onPress={() => setShowPassword(!showPassword)}
+                        style={styles.icon}
                     />
                 )}
             </View>
@@ -54,6 +55,7 @@ export default CustomInput;
 const styles = StyleSheet.create({
     inputFieldContent: {
         marginVertical: 10,
+        width: '100%',
     },
     inputFieldText: {
         fontSize: 16,
@@ -62,19 +64,23 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     inputFieldDataContainer: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: Colors.white,
         borderWidth: 1,
         borderRadius: 10,
-        padding: 10
+        padding: 10,
+        height: 56,
     },
     inputFieldData: {
         flex: 1,
         color: Colors.white,
         fontSize: 16,
         fontWeight: 'bold',
-        padding: 10,
+        marginHorizontal: 10,
+        height: 56,
+    },
+    icon: {
+        marginHorizontal: 5,
     }
 });

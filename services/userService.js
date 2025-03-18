@@ -10,6 +10,14 @@ const userService = {
         }
         return {data:response};
     },
+    // get user by email and password
+    async login(email, password) {
+        const response = await databaseService.getUserByEmailAndPassword(email, password);
+        if (response?.error) {
+            return {error: response.error};
+        }
+        return {data:response};
+    },
     // create user
     async createUser(user) {
         if(!user) {
