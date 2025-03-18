@@ -53,6 +53,12 @@ To learn more about developing your project with Expo, look at the following res
 
 [Drizzle](https://orm.drizzle.team/docs/get-started/expo-new) is a database-first schema generator for TypeScript and SQL.
 
+add **drizzle/** folder to your repository
+and run command
+```bash
+ npx drizzle-kit generate
+```
+
 ## Join the community
 
 Join our community of developers creating universal apps.
