@@ -1,69 +1,90 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
+import React, {useCallback, useState} from 'react'
 import { Colors } from '@/constants/Color';
 import { images } from '@/constants/Icons';
 import CustomInput from '@/components/profile/CustomInput';
 
 const index = () => {
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         email: '',
         password: '',
         confirmPassword: '',
       });
-      const [register, setRegister] = React.useState(false);
+      const [register, setRegister] = useState(false);
+
+      const handleInputChange = useCallback((field, value) => {
+        setFormData(prev => ({
+          ...prev,
+          [field]: value
+        }));
+      }, []);
+
+      const handleLogin = useCallback(() => {
+        // Add login logic here
+      }, []);
+
+      const handleRegister = useCallback(() => {
+        // Add register logic here
+      }, []);
+
+      const handleSwitchLoginOrRegister = useCallback(() => {
+        setRegister(prev => !prev);
+      }, []);
 
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={images.logo} style={styles.logo} />
-      </View>
-      <Text style={styles.title}>Welcome to Online Bike Shopping</Text>
-      <Text style={styles.subtitle}>Sign in to continue</Text>
-      <View style={styles.inputFieldContainer}>
-        <CustomInput
-          label="Email"
-          icon="mail"
-          placeholder="Enter your email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={formData.email}
-          onChangeText={(value) => handleInputChange('email', value)}
-        />
-      </View>
+        <ImageBackground source={images.background} style={{flex:1, resizeMode: 'center'}}>
+            <View style={styles.logoContainer}>
+                <Image source={images.logo} style={styles.logo} />
+            </View>
+            <Text style={styles.title}>Welcome to Online Bike Shopping</Text>
+            <Text style={styles.subtitle}>Sign in to continue</Text>
+            <View style={styles.inputFieldContainer}>
+                <CustomInput
+                label="Email"
+                icon="mail"
+                placeholder="Enter your email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                value={formData.email}
+                onChangeText={(value) => handleInputChange('email', value)}
+                />
+            </View>
 
-      <View style={styles.inputFieldContainer}>
-        <CustomInput
-          label="Password"
-          icon="lock"
-          placeholder="Enter your password"
-          type="password"
-          value={formData.password}
-          onChangeText={(value) => handleInputChange('password', value)}
-        />
-      </View>
+            <View style={styles.inputFieldContainer}>
+                <CustomInput
+                label="Password"
+                icon="lock"
+                placeholder="Enter your password"
+                type="password"
+                value={formData.password}
+                onChangeText={(value) => handleInputChange('password', value)}
+                />
+            </View>
 
-      {register && (
-        <View style={styles.inputFieldContainer}>
-          <CustomInput
-            label="Confirm Password"
-            icon="lock"
-            placeholder="Confirm your password"
-            type="password"
-            value={formData.confirmPassword}
-            onChangeText={(value) => handleInputChange('confirmPassword', value)}
-          />
-        </View>
-      )}
-      <View>
-        <TouchableOpacity>
-          <Text>{register ? 'Sign Up' : 'Sign In'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>{register ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
-        </TouchableOpacity>
-      </View>
+            {register && (
+                <View style={styles.inputFieldContainer}>
+                <CustomInput
+                    label="Confirm Password"
+                    icon="lock"
+                    placeholder="Confirm your password"
+                    type="password"
+                    value={formData.confirmPassword}
+                    onChangeText={(value) => handleInputChange('confirmPassword', value)}
+                />
+                </View>
+            )}
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.loginButton} onPress={register ? handleRegister : handleLogin}>
+                <Text style={styles.loginButtonText}>{register ? 'Sign Up' : 'Sign In'}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleSwitchLoginOrRegister}>
+                <Text style={styles.text}>{register ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
+                </TouchableOpacity>
+            </View>
+        </ImageBackground>
     </View>
   )
 }
@@ -102,6 +123,36 @@ const styles = StyleSheet.create({
     },
     inputFieldContainer: {
         // flex:1,
-        padding: 10,
+        // padding: 10,
       },
+      buttonContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+      },
+      loginButton: {
+        backgroundColor: Colors.primary,
+        padding: 10,
+        borderRadius: 10,
+        marginBottom: 10,
+        borderColor: Colors.white,
+        borderWidth: 1,
+        padding: 20
+    },
+      loginButtonText: {
+        color: Colors.white,
+        fontSize: 16,
+        fontWeight: 'bold',
+      },
+      registerText: {
+        color: Colors.white,
+        fontSize: 16,
+        fontWeight: 'bold'
+      },
+      text:{
+        color: Colors.white,
+        fontSize: 16,
+        // fontWeight: 'bold'
+      }
 })
