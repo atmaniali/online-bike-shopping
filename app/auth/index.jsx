@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20
+        // marginTop: 10
       },
       loginButton: {
         backgroundColor: Colors.primary,
@@ -138,7 +138,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderColor: Colors.white,
         borderWidth: 1,
-        padding: 20
+        width: '60%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
       loginButtonText: {
         color: Colors.white,
