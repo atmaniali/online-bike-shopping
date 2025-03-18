@@ -49,7 +49,7 @@ To learn more about developing your project with Expo, look at the following res
 - Octicons
 - FontAwesome
 
-# Drizzle
+# Drizzle + SQLite
 
 [Drizzle](https://orm.drizzle.team/docs/get-started/expo-new) is a database-first schema generator for TypeScript and SQL.
 

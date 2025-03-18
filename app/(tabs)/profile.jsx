@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { Colors } from '@/constants/Color';
 import Header from '@/components/profile/Header';
@@ -8,6 +9,8 @@ import CustomInput from '@/components/profile/CustomInput';
 import { images } from '@/constants/Icons';
 
 const Profile = () => {
+  const router = useRouter();
+
   const [image, setImage] = useState(images.profileImage);
   const [formData, setFormData] = useState({
     email: '',
@@ -43,8 +46,12 @@ const Profile = () => {
     }));
   }, []);
 
+  const handleLogin = useCallback(() => {
+    router.push('/auth');
+  }, []);
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{paddingBottom: 15}}>
       <Header />
       <ProfileImage image={image} pickImage={pickImage} />
 
@@ -94,7 +101,12 @@ const Profile = () => {
           value={formData.password}
           onChangeText={(value) => handleInputChange('password', value)}
         />
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <Text style={styles.loginButtonText}>Login</Text>
+      </TouchableOpacity>
       </View>
+
+      
 
     </ScrollView>
   )
@@ -123,7 +135,26 @@ const styles = StyleSheet.create({
       flex:1,
       padding: 10,
     },
+    loginButton:{
+      borderRadius: 5,
+      borderColor: Colors.white,
+      borderWidth: 1,
+      // backgroundColor: Colors.primary,
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    loginButtonText:{
+      color: Colors.white,
+      fontSize: 16,
+      fontWeight: 'bold',
+      // marginHorizontal: 10,
+    },
 });
+
+
+// Improvement to make  
+
 
 // 1 Component Organization
 // Consider breaking down this large component into smaller reusable components:
