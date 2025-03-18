@@ -1,16 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ImageBackground, Alert, ActivityIndicator } from 'react-native'
 import React, {useCallback, useState} from 'react'
 import { Colors } from '@/constants/Color';
 import { images } from '@/constants/Icons';
 import CustomInput from '@/components/profile/CustomInput';
+import {userService} from '@/services/userService';
 
-const index = () => {
+const Auth = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
         confirmPassword: '',
       });
       const [register, setRegister] = useState(false);
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState(null);
 
       const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({
@@ -23,8 +26,30 @@ const index = () => {
         // Add login logic here
       }, []);
 
-      const handleRegister = useCallback(() => {
+      const handleRegister = useCallback(async() => {
         // Add register logic here
+        console.log(formData);
+        if(formData.email.trim() === '' || formData.password.trim() === '' || formData.confirmPassword.trim() === '') {
+            setError('All fields are required');
+            return;
+        }
+
+        if(formData.password !== formData.confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        const response = await userService.createUser(formData);
+        if (response?.error) {
+            Alert.alert('Error', response.error);
+            setError(response.error);
+            return;
+        }
+        setLoading(false);
+        // setError(null);
       }, []);
 
       const handleSwitchLoginOrRegister = useCallback(() => {
@@ -38,6 +63,7 @@ const index = () => {
             <View style={styles.logoContainer}>
                 <Image source={images.logo} style={styles.logo} />
             </View>
+            {loading && <ActivityIndicator size="large" color={Colors.bleuLight} />}
             <Text style={styles.title}>Welcome to Online Bike Shopping</Text>
             <Text style={styles.subtitle}>Sign in to continue</Text>
             <View style={styles.inputFieldContainer}>
@@ -80,6 +106,7 @@ const index = () => {
                 <TouchableOpacity style={styles.loginButton} onPress={register ? handleRegister : handleLogin}>
                 <Text style={styles.loginButtonText}>{register ? 'Sign Up' : 'Sign In'}</Text>
                 </TouchableOpacity>
+                {error && <Text style={styles.error}>{error}</Text>}
                 <TouchableOpacity onPress={handleSwitchLoginOrRegister}>
                 <Text style={styles.text}>{register ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
                 </TouchableOpacity>
@@ -89,7 +116,7 @@ const index = () => {
   )
 }
 
-export default index
+export default Auth
 
 const styles = StyleSheet.create({
     container: {
@@ -156,5 +183,13 @@ const styles = StyleSheet.create({
         color: Colors.white,
         fontSize: 16,
         // fontWeight: 'bold'
+      },
+      error: {
+        color: Colors.error,
+        fontSize: 16,
+        // marginTop: 10
       }
 })
+
+// TODO : verify form to make it update the data
+// TODO : handleLogin

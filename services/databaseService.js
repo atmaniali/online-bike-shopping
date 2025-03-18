@@ -1,8 +1,9 @@
 import * as SQLite from "expo-sqlite";
-import {drizzle} from "drizzle-orm/sqlite-core";
-import { usersTable } from "@/db/schema";
+import { drizzle } from "drizzle-orm/expo-sqlite";
+import { eq } from "drizzle-orm";
+import { usersTable } from "@/db/schema/users";
 
-const online_bike_db = SQLite.openDatabase("online_bike.db");
+const online_bike_db = SQLite.openDatabaseSync("online_bike.db");
 const db = drizzle(online_bike_db);
 
 
@@ -14,6 +15,16 @@ const databaseService = {
             return users;
         } catch (error) {
             console.error("Error listing users:", error);
+            return {error: error.message};
+        }
+    },
+    // Get user by email and password
+    async getUserByEmailAndPassword(email, password) {
+        try {
+            const user = await db.select().from(usersTable).where(eq(usersTable.email, email).and(eq(usersTable.password, password)));
+            return user;
+        } catch (error) {
+            console.error("Error getting user by id:", error);
             return {error: error.message};
         }
     },

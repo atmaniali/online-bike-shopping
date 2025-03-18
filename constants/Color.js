@@ -7,5 +7,6 @@ export const Colors = {
     black: '#000',
     blackLight: '#222834',
     gray: 'gray',
+    error: 'red'
 }
 
