@@ -10,8 +10,14 @@ module.exports = function (api) {
           alias: {
             '@assets': './assets',
           },
-        },
+        }
       ],
+      [
+        'babel-plugin-inline-import',
+        {
+          "extension": [".sql"]
+        }
+      ]
     ],
   };
 };
