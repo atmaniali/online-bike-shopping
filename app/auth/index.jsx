@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Color';
 import { images } from '@/constants/Icons';
 import CustomInput from '@/components/profile/CustomInput';
 import {userService} from '@/services/userService';
+import AuthForm from '@/components/form/AuthForm';
 
 const Auth = () => {
     const [formData, setFormData] = useState({
@@ -11,15 +12,17 @@ const Auth = () => {
         password: '',
         confirmPassword: '',
       });
-      const [register, setRegister] = useState(false);
+      const [isRegister, setIsRegister] = useState(false);
       const [loading, setLoading] = useState(false);
       const [error, setError] = useState(null);
 
       const handleInputChange = useCallback((field, value) => {
+        console.log({[field]: value});
         setFormData(prev => ({
           ...prev,
           [field]: value
         }));
+        console.log(formData);
       }, []);
 
       const handleLogin = useCallback(() => {
@@ -50,10 +53,15 @@ const Auth = () => {
         }
         setLoading(false);
         // setError(null);
+        setFormData({
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
       }, []);
 
       const handleSwitchLoginOrRegister = useCallback(() => {
-        setRegister(prev => !prev);
+        setIsRegister(prev => !prev);
       }, []);
 
 
@@ -66,7 +74,10 @@ const Auth = () => {
             {loading && <ActivityIndicator size="large" color={Colors.bleuLight} />}
             <Text style={styles.title}>Welcome to Online Bike Shopping</Text>
             <Text style={styles.subtitle}>Sign in to continue</Text>
-            <View style={styles.inputFieldContainer}>
+
+            <AuthForm  />
+
+            {/* <View style={styles.inputFieldContainer}>
                 <CustomInput
                 label="Email"
                 icon="mail"
@@ -90,7 +101,7 @@ const Auth = () => {
                 />
             </View>
 
-            {register && (
+            {isRegister && (
                 <View style={styles.inputFieldContainer}>
                 <CustomInput
                     label="Confirm Password"
@@ -103,14 +114,14 @@ const Auth = () => {
                 </View>
             )}
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.loginButton} onPress={register ? handleRegister : handleLogin}>
-                <Text style={styles.loginButtonText}>{register ? 'Sign Up' : 'Sign In'}</Text>
+                <TouchableOpacity style={styles.loginButton} onPress={isRegister ? handleRegister : handleLogin}>
+                <Text style={styles.loginButtonText}>{isRegister ? 'Sign Up' : 'Sign In'}</Text>
                 </TouchableOpacity>
                 {error && <Text style={styles.error}>{error}</Text>}
                 <TouchableOpacity onPress={handleSwitchLoginOrRegister}>
-                <Text style={styles.text}>{register ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
+                <Text style={styles.text}>{isRegister ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </ImageBackground>
     </View>
   )
