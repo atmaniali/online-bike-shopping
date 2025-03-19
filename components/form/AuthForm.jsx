@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert, Button } from 'react-native';
 import {useForm, Controller, SubmitErrorHandler} from 'react-hook-form';
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from '@/constants/Color';
+import Constants from 'expo-constants';
 
 // type FormData = {
 //     email: string;
@@ -24,45 +25,89 @@ const AuthForm = () => {
   const onError  = (errors) => {
     return console.log(errors);
   }
-
+ // TODO: recreate form without icons and test it 
   return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>
-        <Text style={styles.textFieldContainer}>Email</Text>
-        <Controller 
-        control={control}
-        render={({field: {onChange, onBlur, value}}) =>(
-          <View>
-            <Feather name="mail" size={24} color={Colors.white} style={styles.icon} />
-            <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor={Colors.white}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            value={value}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            />
-          </View>
-        )}
-        rules={{
-          required: true
-          // required: 'Email is required',
-          // pattern: {
-          //   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-          //   message: 'Invalid email format'
-          // }
-        }}
-        />
+        <Text style={styles.fieldLabel}>Email</Text>
+        <Controller
+         control={control}
+         name="email"
+         rules={{required: true}}
+         render={({field: {onChange, onBlur, value}}) => (
+            <View style={styles.inputFieldContainer}>
+                <Feather name="mail" size={24} color={Colors.white} />
+                <TextInput 
+                    style={styles.input} 
+                    value={value} 
+                    onChangeText={onChange} 
+                    onBlur={onBlur} placeholder="Enter your email" 
+                    keyboardType="email-address" 
+                    autoCapitalize="none" 
+                    autoCorrect={false}/>
+            </View>
+         )}
+         />
       </View>
-      <View style={styles.buttonSubmitContainer}>
-        <TouchableOpacity>
-          <Text>{true ? 'Sign Up' : 'Sign In'}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>{true ? 'Already have an account? Login' : 'Don\'t have an account? Sign Up'}</Text>
-        </TouchableOpacity>
+    
+      <View style={styles.fieldContainer}>
+        <Text style={styles.fieldLabel}>Password</Text>
+        <Controller
+         control={control}
+         name="password"
+         rules={{required: true}}
+         render={({field: {onChange, onBlur, value}}) => (
+            <View style={styles.inputFieldContainer}>
+                <Feather name="lock" size={24} color={Colors.white} />
+                <TextInput 
+                    style={styles.input} 
+                    value={value} 
+                    onChangeText={onChange} 
+                    onBlur={onBlur} placeholder="Enter your password" 
+                    keyboardType="default" 
+                    autoCapitalize="none" 
+                    autoCorrect={false}/>
+                <Feather 
+                        name="eye-off"
+                        size={24} 
+                        color={Colors.white} 
+                        style={styles.icon}
+                    />    
+            </View>
+         )}
+         />
+      </View>
+
+      <View style={styles.fieldContainer}>
+        <Text style={styles.fieldLabel}>Confirm Password</Text>
+        <Controller
+         control={control}
+         name="confirmPassword"
+         rules={{required: true}}
+         render={({field: {onChange, onBlur, value}}) => (
+            <View style={styles.inputFieldContainer}>
+                <Feather name="lock" size={24} color={Colors.white} />
+                <TextInput 
+                    style={styles.input} 
+                    value={value} 
+                    onChangeText={onChange} 
+                    onBlur={onBlur} placeholder="Enter your confirm password" 
+                    keyboardType="default" 
+                    autoCapitalize="none" 
+                    autoCorrect={false}/>
+                <Feather 
+                        name="eye-off"
+                        size={24} 
+                        color={Colors.white} 
+                        style={styles.icon}
+                    />    
+            </View>
+         )}
+         />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button title="Register" onPress={handleSubmit(onSubmit)} color={Colors.gray} style={styles.button} />
       </View>
       
     </View>
@@ -72,10 +117,34 @@ const AuthForm = () => {
 export default AuthForm
 
 const styles = StyleSheet.create({
-  container:{},
-  fieldContainer:{},
-  textFieldContainer:{},
-  icon:{},
-  input:{},
-  buttonSubmitContainer:{},
+    container:{
+        flex:1,
+        padding:10,
+        marginTop:5
+    },
+    fieldContainer: {
+        marginBottom: 10
+    },
+    fieldLabel: {
+        color: Colors.white,
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    inputFieldContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 5,
+        borderColor: Colors.white,
+        borderWidth: 1,
+        padding: 10,
+        height: 56,
+        marginBottom: 10
+    },
+    input: {
+        flex: 1,
+        color: Colors.white
+    },
+    buttonContainer:{},
+    button:{},
 })
