@@ -22,7 +22,14 @@ const AuthForm = () => {
     const [isRegister, setIsRegister] = React.useState(false);
   const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm();
   const onSubmit = (data) => {
+    console.log("button clicked")
+    // conso/le.log(value)
     console.log(data);
+    reset({
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
   }
 
   const onError  = (errors) => {
@@ -117,7 +124,7 @@ const AuthForm = () => {
       <View style={styles.buttonContainer}>
         <Button 
         title={isRegister ? "Register" : "Login"} 
-        onPress={handleSubmit(onSubmit)} 
+        onPress={handleSubmit(onSubmit, onError)} 
         // color={Colors.gray} 
         style={styles.button} />
         <TouchableOpacity onPress={() => setIsRegister(!isRegister)}>
@@ -175,6 +182,8 @@ const styles = StyleSheet.create({
     buttonText:{
         color: Colors.white,
         fontSize: 16,
+        alignSelf: 'center',
+        marginTop: 10,
         // fontWeight: 'bold'
     }
 })
