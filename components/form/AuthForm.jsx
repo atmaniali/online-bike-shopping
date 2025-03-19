@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert, Button } from 'react-native';
-import {useForm, Controller, SubmitErrorHandler} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from '@/constants/Color';
-import Constants from 'expo-constants';
+import {userService} from '@/services/userService';
+// import Constants from 'expo-constants';
 
 // type FormData = {
 //     email: string;
@@ -20,11 +21,34 @@ const AuthForm = () => {
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
     const [isRegister, setIsRegister] = React.useState(false);
+
+    const handleRegister = async (data) => {
+        console.log('Data', data)
+        if(data.email.trim() === '' || data.password.trim() === '' || data.confirmPassword.trim() === '') {
+            Alert.alert('Error', 'All fields are required');
+            return;
+        }
+        console.log('test condition trim pass')
+
+        if(data.password !== data.confirmPassword) {
+            Alert.alert('Error', 'Passwords do not match');
+            return;
+        }
+        console.log('test condition password equal pass')
+
+        const response = await userService.createUser(data);
+        if (response?.error) {
+            Alert.alert('Error', response.error);
+            return;
+        }
+        Alert.alert('Success', 'User created successfully');
+        console.log({response})
+    }
+
   const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm();
   const onSubmit = (data) => {
     console.log("button clicked")
-    // conso/le.log(value)
-    console.log(data);
+    handleRegister(data)
     reset({
         email: '',
         password: '',
