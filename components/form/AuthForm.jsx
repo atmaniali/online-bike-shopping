@@ -24,7 +24,7 @@ const AuthForm = () => {
 
     const handleRegister = async (data) => {
         console.log('Data', data)
-        if(data.email.trim() === '' || data.password.trim() === '' || data.confirmPassword.trim() === '') {
+        if(data.email.trim() === '' || data.password.trim() === '' || data.confirmPassword?.trim() === '') {
             Alert.alert('Error', 'All fields are required');
             return;
         }

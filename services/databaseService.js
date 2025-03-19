@@ -30,6 +30,7 @@ const databaseService = {
     },
     // Create user
     async createUser(user) {
+        console.log('user', user)
         try {
             const result = await db.insert(usersTable).values(user);
             return result;
